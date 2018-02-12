@@ -76,7 +76,7 @@ us_state_abbrev = {
     'Wisconsin': 'WI',
     'Wyoming': 'WY',
 }
-state_abbrev = {v: k for k, v in us_state_abbrev.items()}
+state_abbrev = {v: k for k, v in us_state_abbrev.items()} #Flip key and value for later use
 new_state = []
 
 with open(boss_path, newline="") as csvfile:
@@ -100,6 +100,8 @@ with open(boss_path, newline="") as csvfile:
         new_date.append((datetime.strptime(date[d], '%Y-%m-%d').strftime('%d/%m/%Y')))
 
     # The SSN data should be re-written such that the first five numbers are hidden from view.
+    # Use regex (regular expression) function for specified formatting
+    # \d signifies any alphanumeric character (can also use [0-9]). {} is how many characters.
     for c in range(len(ssn)):
         new_ssn.append(re.sub('\d{3}-\d{2}', '***-**', ssn[c]))
 
@@ -109,7 +111,7 @@ with open(boss_path, newline="") as csvfile:
             if state[s] in value:
                 new_state.append(key)
 
-
+#Create new csv file
 with open(output_path, "w", newline='') as csvfile:
 
     # Initialize the csv writer
@@ -118,7 +120,7 @@ with open(output_path, "w", newline='') as csvfile:
     #Write the first row for column headers
     boss_writer.writerow(["Emp ID", "First Name", "Last Name", "DOB", "SSN", "State"])
 
-    #Write the second row for info
+    #Zip lists together and write a row in csvfile for each row
     new = zip(emp_id, first_name, last_name, new_date, new_ssn, new_state)
     for row in new:
         boss_writer.writerow(row)
