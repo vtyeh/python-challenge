@@ -1,7 +1,7 @@
 import os
 import csv
 
-budget_path = os.path.join("raw_data", "budget_data_2.csv")
+budget_path = os.path.join("raw_data", "budget_data_2.csv") # Change path to desired folder and csv file
 
 print("Financial Analysis")
 print("------------------")
@@ -13,6 +13,7 @@ avg_rev =[]
 
 revenue = 0
 index = 0
+
 with open(budget_path, 'r', newline="") as csvfile:
     csvreader = csv.reader(csvfile, delimiter=",")
     next(csvfile, None)
@@ -29,11 +30,6 @@ with open(budget_path, 'r', newline="") as csvfile:
     print("Total Revenue: $" + str(revenue))
 
     # Calculate average change in revenue between months
-    # for x in total_revenue:
-    #     x = int(total_revenue[index]) - int(total_revenue[index - 1])
-    #     index = index + 1
-    #     avg_rev.append(x)
-    # print(total_revenue)
     for i in range(len(total_revenue)):
         if i < (len(total_revenue)-1):
             avg_rev.append(int(total_revenue[i+1])-int(total_revenue[i]))
