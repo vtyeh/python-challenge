@@ -18,9 +18,6 @@ date = []
 new_date = []
 
 ssn = []
-ssn_1 = []
-ssn_2 = []
-ssn_3 = []
 new_ssn = []
 
 state = []
